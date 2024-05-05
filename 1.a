@@ -1,0 +1,22 @@
+import re
+def lex(ip):
+   token_specification={
+    'header':r'<stdio.h>|<conio.h>|<stdlib.h>',
+    'keyword':r'if|else|for|while|int|float|char|return|#include',
+    'operator':r'\+|-|\*|/|=|==|!=|<|>|<=|>=',
+    'identifier':r'[a-zA-Z_][a-zA-Z0-9_]*',
+    'number':r'\d+[\.\dt]?',
+    'string':r'"([^"]*)"',
+    'comment':r'//.|/\(.|\n*?\*/',
+    'whitespace':r'\s+'
+    }
+   words=ip.split()
+   for word in words:
+      for key,value in token_specification.items():
+         if re.match(value,word):
+            word= word.replace(";","")
+            print(f'{(key),(word)}')
+            break
+ip=open("IP.cpp",'r')
+file=ip.read()
+lex(file)
